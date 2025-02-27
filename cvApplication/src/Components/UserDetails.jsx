@@ -1,15 +1,6 @@
-import { useState } from "react";
-
-const UserDetails = () => {
-  const [name, setName] = useState();
-  const increment = function () {
-    setName("blank");
-  };
-  return (
-    <div>
-      <button onClick={increment}>{name}</button>
-    </div>
-  );
+const UserDetails = function ({ firstName, secondName }) {
+  const name = firstName + " " + secondName;
+  return <div>{name}</div>;
 };
 
 export default UserDetails;

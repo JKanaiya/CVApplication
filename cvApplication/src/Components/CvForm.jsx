@@ -1,36 +1,6 @@
 import { useState } from "react";
-import { Preview } from "./Preview.jsx";
 
-const CvForm = function () {
-  const [cv, setCv] = useState({
-    firstName: "John",
-    secondName: "Doe",
-    resumeDetails: "A worker in a job",
-    phoneNumber: "0123456789",
-    email: "johnDoe@email.com",
-    address: "realPlaceInRealCountry",
-    website: "johndoe.com",
-  });
-  const handleNameChange = function () {
-    setCv({ ...cv, firstName, secondName });
-  };
-
-  const handleResumeChange = function () {
-    setCv({ ...cv, resumeDetails });
-  };
-
-  const handleEmailChange = function () {
-    setCv({ ...cv, email });
-  };
-  const handleWebsiteChange = function () {
-    setCv({ ...cv, website });
-  };
-  const handlePhoneNumberChange = function () {
-    setCv({ ...cv, phoneNumber });
-  };
-  const handleAddressChange = function () {
-    setCv({ ...cv, address });
-  };
+function CvForm({ cv, handleCvChange }) {
   const [firstName, setFirstName] = useState("John");
   const [secondName, setSecondName] = useState("Doe");
   const [resumeDetails, setResumeDetails] = useState("A worker in a job");
@@ -38,7 +8,31 @@ const CvForm = function () {
   const [phoneNumber, setPhoneNumber] = useState("0123456789");
   const [address, setAddress] = useState("realPlaceInRealCountry");
   const [website, setWebsite] = useState("johndoe.com");
-  // TODO: Ensure the details properly from this
+
+  const handleNameChange = function () {
+    handleCvChange({ ...cv, firstName, secondName });
+  };
+  const handleResumeChange = function (deets) {
+    setResumeDetails(deets);
+    handleCvChange({ ...cv, resumeDetails });
+  };
+  const handleEmailChange = function (deets) {
+    setEmail(deets);
+    handleCvChange({ ...cv, email });
+  };
+  const handleWebsiteChange = function (deets) {
+    setWebsite(deets);
+    handleCvChange({ ...cv, website });
+  };
+  const handlePhoneNumberChange = function (deets) {
+    setPhoneNumber(deets);
+    handleCvChange({ ...cv, phoneNumber });
+  };
+  const handleAddressChange = function (deets) {
+    setAddress(deets);
+    handleCvChange({ ...cv, address });
+  };
+  // TODO: Ensure the details properly move from this
   return (
     <section>
       <h2> CV </h2>
@@ -50,6 +44,7 @@ const CvForm = function () {
             setFirstName(e.target.value);
             handleNameChange(e.target.value);
           }}
+          placeholder="First Name"
         ></input>
         <input
           type="text"
@@ -58,56 +53,54 @@ const CvForm = function () {
             setSecondName(e.target.value);
             handleNameChange(e.target.value);
           }}
+          placeholder="Second Name"
         ></input>
         <h3>Profile</h3>
         <input
           id="resumeDetails"
           type="text"
           onChange={(e) => {
-            setResumeDetails(e.target.value);
             handleResumeChange(e.target.value);
           }}
-        >
-          onChange={(e) => handleResumeChange(e.target.value)}
-        </input>
+          placeholder="Resume"
+        ></input>
         <h3>Contact</h3>
         <input
           type="text"
           id="phoneNumber"
           onChange={(e) => {
-            setPhoneNumber(e.target.value);
             handlePhoneNumberChange(e.target.value);
           }}
+          placeholder="Phone Number"
         ></input>
         <input
           type="text"
           id="email"
           onChange={(e) => {
-            setEmail(e.target.value);
             handleEmailChange(e.target.value);
           }}
+          placeholder="Email"
         ></input>
         <input
           type="text"
           id="address"
           onChange={(e) => {
-            setAddress(e.target.value);
             handleAddressChange(e.target.value);
           }}
+          placeholder="Address"
         ></input>
         <input
           type="text"
           id="website"
           onChange={(e) => {
-            setWebsite(e.target.value);
             handleWebsiteChange(e.target.value);
           }}
+          placeholder="Website"
         ></input>
         <button>Submit</button>
       </form>
-      <Preview />
     </section>
   );
-};
+}
 
 export default CvForm;
