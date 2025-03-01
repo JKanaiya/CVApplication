@@ -1,6 +1,8 @@
-const UserInfo = function() {
-  return <div>
-  </div>
-} 
-export default UserInfo
-
+const UserInfo = function ({ resumeDetails }) {
+  return (
+    <div>
+      <p>{resumeDetails}</p>
+    </div>
+  );
+};
+export default UserInfo;

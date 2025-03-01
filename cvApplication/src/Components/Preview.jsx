@@ -5,9 +5,9 @@ import UserHeader from "./UserHeader";
 const Preview = function ({ cv }) {
   return (
     <div>
-      <UserHeader {...cv} />
-      <UserInfo {...cv} />
-      <UserDetails firstName={cv.firstName} secondName={cv.secondName} />
+      <UserHeader firstName={cv.firstName} secondName={cv.secondName} />
+      <UserInfo resumeDetails={cv.resumeDetails} />
+      <UserDetails {...cv} />
     </div>
   );
 };
