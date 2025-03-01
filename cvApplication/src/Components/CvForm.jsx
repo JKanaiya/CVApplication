@@ -35,70 +35,76 @@ function CvForm({ cv, handleCvChange }) {
   // TODO: Ensure the details properly move from this
   return (
     <section>
-      <h2> CV </h2>
       <form action="">
-        <input
-          type="text"
-          id="firstName"
-          onChange={(e) => {
-            setFirstName(e.target.value);
-            handleNameChange(e.target.value);
-          }}
-          placeholder="First Name"
-        ></input>
-        <input
-          type="text"
-          id="secondName"
-          onChange={(e) => {
-            setSecondName(e.target.value);
-            handleNameChange(e.target.value);
-          }}
-          placeholder="Second Name"
-        ></input>
+        <h2> CV </h2>
+        <div id="name">
+          <input
+            type="text"
+            id="firstName"
+            onChange={(e) => {
+              setFirstName(e.target.value);
+              handleNameChange(e.target.value);
+            }}
+            placeholder="First Name"
+          ></input>
+          <input
+            type="text"
+            id="secondName"
+            onChange={(e) => {
+              setSecondName(e.target.value);
+              handleNameChange(e.target.value);
+            }}
+            placeholder="Second Name"
+          ></input>
+        </div>
         <h3>Profile</h3>
-        <input
-          id="resumeDetails"
-          type="text"
-          onChange={(e) => {
-            handleResumeChange(e.target.value);
-          }}
-          placeholder="Resume"
-        ></input>
+        <div>
+          <textarea
+            id="resumeDetails"
+            type="text"
+            onChange={(e) => {
+              handleResumeChange(e.target.value);
+            }}
+            placeholder="Resume"
+          ></textarea>
+        </div>
         <h3>Contact</h3>
-        <input
-          type="text"
-          id="phoneNumber"
-          onChange={(e) => {
-            handlePhoneNumberChange(e.target.value);
-          }}
-          placeholder="Phone Number"
-        ></input>
-        <input
-          type="text"
-          id="email"
-          onChange={(e) => {
-            handleEmailChange(e.target.value);
-          }}
-          placeholder="Email"
-        ></input>
-        <input
-          type="text"
-          id="address"
-          onChange={(e) => {
-            handleAddressChange(e.target.value);
-          }}
-          placeholder="Address"
-        ></input>
-        <input
-          type="text"
-          id="website"
-          onChange={(e) => {
-            handleWebsiteChange(e.target.value);
-          }}
-          placeholder="Website"
-        ></input>
-        <button>Submit</button>
+        <div id="details">
+          <input
+            type="text"
+            id="phoneNumber"
+            onChange={(e) => {
+              handlePhoneNumberChange(e.target.value);
+            }}
+            placeholder="Phone Number"
+          ></input>
+          <input
+            type="text"
+            id="email"
+            onChange={(e) => {
+              handleEmailChange(e.target.value);
+            }}
+            placeholder="Email"
+          ></input>
+          <input
+            type="text"
+            id="address"
+            onChange={(e) => {
+              handleAddressChange(e.target.value);
+            }}
+            placeholder="Address"
+          ></input>
+          <input
+            type="text"
+            id="website"
+            onChange={(e) => {
+              handleWebsiteChange(e.target.value);
+            }}
+            placeholder="Website"
+          ></input>
+        </div>
       </form>
+      <button>Submit</button>
     </section>
   );
 }

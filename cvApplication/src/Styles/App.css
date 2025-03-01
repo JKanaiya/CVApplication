@@ -53,3 +53,44 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+#root {
+  place-self: center;
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  padding: 5%;
+  min-height: 70dvh;
+  background-color: white;
+  grid-template-columns: repeat(2, 1fr);
+}
+#root section {
+  padding: 5%;
+  background-color: burlywood;
+  flex-direction: column;
+  display: flex;
+  gap: 20px;
+}
+#root section form {
+  display: flex;
+  flex-direction: column;
+}
+#details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+section div {
+  padding: 3%;
+  display: flex;
+  column-gap: 10px;
+}
+button {
+  place-self: center;
+  width: 100px;
+}
+#root > div {
+  padding: 5%;
+  display: flex;
+  column-gap: 100px;
+  background-color: turquoise;
+}
