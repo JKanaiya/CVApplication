@@ -15,7 +15,7 @@ function App() {
   });
 
   const [displayPrev, setDisplayPrev] = useState("none");
-  const [displayForm, setDisplayForm] = useState("grid");
+  const [displayForm, setDisplayForm] = useState("flex");
 
   const togglePreview = function () {
     setDisplayPrev(displayPrev == "none" ? "grid" : "none");

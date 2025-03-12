@@ -8,27 +8,16 @@ function CvForm({ cv, sendData, form, display }) {
   };
 
   const [workData, setWorkData] = useState([]);
-  const [schoolData, setSchoolData] = useState([]);
 
   const addWorkData = function () {
-    setWorkData([
-      ...workData,
-      {
-        id: workData.length,
-      },
-    ]);
+    let count = 0;
+    setWorkData(...workData, {
+      id: count++,
+    });
+    console.log(workData);
   };
 
-  const addSchoolData = function () {
-    setSchoolData([
-      ...schoolData,
-      {
-        id: schoolData.length,
-      },
-    ]);
-  };
-
-  const workOutput = workData.map((row) => {
+  const workOutput = workData?.map((row) => {
     return (
       <tr key={row.id}>
         <td>
@@ -47,22 +36,6 @@ function CvForm({ cv, sendData, form, display }) {
         </td>
         <td>
           <input type="text" name="company"></input>
-        </td>
-      </tr>
-    );
-  });
-
-  const schoolOutput = schoolData.map((row) => {
-    return (
-      <tr key={row.id}>
-        <td>
-          <input type="date" className="date" name="completedDate"></input>
-        </td>
-        <td>
-          <input type="text" name="course"></input>
-        </td>
-        <td>
-          <input type="text" name="school"></input>
         </td>
       </tr>
     );
@@ -146,7 +119,6 @@ function CvForm({ cv, sendData, form, display }) {
                   <input type="text" name="school"></input>
                 </td>
               </tr>
-              {schoolOutput}
             </tbody>
           </table>
         </fieldset>
@@ -181,16 +153,12 @@ function CvForm({ cv, sendData, form, display }) {
                   <input type="text" name="company"></input>
                 </td>
               </tr>
-              {workOutput}
+              {Array.isArray(workOutput) && workOutput}
             </tbody>
           </table>
         </fieldset>
-        {/*TODO: change these to icons + and - later*/}
         <button type="button" id="addWorkRow" onClick={addWorkData}>
           Add Work
-        </button>
-        <button type="button" id="addEducationRow" onClick={addSchoolData}>
-          Add Education
         </button>
         <button type="submit">Submit</button>
       </form>
