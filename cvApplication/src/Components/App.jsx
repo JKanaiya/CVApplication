@@ -13,13 +13,28 @@ function App() {
     address: "realPlaceInRealCountry",
     website: "johndoe.com",
   });
-  const handleCvChange = function (cv) {
-    setCv({ ...cv });
+
+  const [displayPrev, setDisplayPrev] = useState("none");
+  const [displayForm, setDisplayForm] = useState("grid");
+
+  const togglePreview = function () {
+    setDisplayPrev(displayPrev == "none" ? "grid" : "none");
+    setDisplayForm(displayForm == "none" ? "flex" : "none");
   };
+
+  const sendData = function (formData) {
+    setCv({ ...formData });
+    togglePreview();
+  };
+
+  const editData = function () {
+    togglePreview();
+  };
+
   return (
     <>
-      <CvForm cv={cv} handleCvChange={handleCvChange} />
-      <Preview cv={cv} />
+      <CvForm sendData={sendData} display={displayForm} />
+      <Preview cv={cv} display={displayPrev} editData={editData} />
     </>
   );
 }

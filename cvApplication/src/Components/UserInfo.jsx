@@ -1,8 +1,17 @@
-const UserInfo = function ({ resumeDetails }) {
+const UserInfo = function ({ jobTitle }) {
   return (
-    <div>
-      <p>{resumeDetails}</p>
-    </div>
+    <table>
+      <caption>Work Experience</caption>
+      <thead>
+        <tr>
+          <td>Job Title: </td>
+          <td>Company: </td>
+          <td>From:</td>
+          <td>To: </td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   );
 };
 export default UserInfo;

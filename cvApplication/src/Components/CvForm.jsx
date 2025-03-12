@@ -1,110 +1,138 @@
 import { useState } from "react";
 
-function CvForm({ cv, handleCvChange }) {
-  const [firstName, setFirstName] = useState("John");
-  const [secondName, setSecondName] = useState("Doe");
-  const [resumeDetails, setResumeDetails] = useState("A worker in a job");
-  const [email, setEmail] = useState("johnDoe@email.com");
-  const [phoneNumber, setPhoneNumber] = useState("0123456789");
-  const [address, setAddress] = useState("realPlaceInRealCountry");
-  const [website, setWebsite] = useState("johndoe.com");
+function CvForm({ cv, sendData, form, display }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    sendData(Object.fromEntries(formData));
+  };
 
-  const handleNameChange = function () {
-    handleCvChange({ ...cv, firstName, secondName });
+  const [workData, setWorkData] = useState([{}]);
+
+  const addWorkData = function () {
+    setWorkData(...workData, {});
   };
-  const handleResumeChange = function (deets) {
-    setResumeDetails(deets);
-    handleCvChange({ ...cv, resumeDetails });
-  };
-  const handleEmailChange = function (deets) {
-    setEmail(deets);
-    handleCvChange({ ...cv, email });
-  };
-  const handleWebsiteChange = function (deets) {
-    setWebsite(deets);
-    handleCvChange({ ...cv, website });
-  };
-  const handlePhoneNumberChange = function (deets) {
-    setPhoneNumber(deets);
-    handleCvChange({ ...cv, phoneNumber });
-  };
-  const handleAddressChange = function (deets) {
-    setAddress(deets);
-    handleCvChange({ ...cv, address });
-  };
-  // TODO: Ensure the details properly move from this
+
   return (
-    <section>
-      <form action="">
-        <h2> CV </h2>
-        <div id="name">
+    <section style={{ display: `${display}` }}>
+      <form id="form" onSubmit={handleSubmit}>
+        <h1> CV </h1>
+        <fieldset id="nameAndPersonal">
+          <legend>Name and Personal Pitch</legend>
           <input
             type="text"
             id="firstName"
-            onChange={(e) => {
-              setFirstName(e.target.value);
-              handleNameChange(e.target.value);
-            }}
+            name="firstName"
             placeholder="First Name"
           ></input>
           <input
             type="text"
             id="secondName"
-            onChange={(e) => {
-              setSecondName(e.target.value);
-              handleNameChange(e.target.value);
-            }}
+            name="secondName"
             placeholder="Second Name"
           ></input>
-        </div>
-        <h3>Profile</h3>
-        <div>
           <textarea
             id="resumeDetails"
             type="text"
-            onChange={(e) => {
-              handleResumeChange(e.target.value);
-            }}
+            name="resumeDetails"
             placeholder="Resume"
           ></textarea>
-        </div>
-        <h3>Contact</h3>
-        <div id="details">
+        </fieldset>
+        <fieldset id="contactDetails">
+          <legend>Contact Details</legend>
           <input
             type="text"
             id="phoneNumber"
-            onChange={(e) => {
-              handlePhoneNumberChange(e.target.value);
-            }}
+            name="phoneNumber"
             placeholder="Phone Number"
           ></input>
           <input
             type="text"
             id="email"
-            onChange={(e) => {
-              handleEmailChange(e.target.value);
-            }}
+            name="email"
             placeholder="Email"
           ></input>
           <input
             type="text"
             id="address"
-            onChange={(e) => {
-              handleAddressChange(e.target.value);
-            }}
+            name="address"
             placeholder="Address"
           ></input>
           <input
             type="text"
             id="website"
-            onChange={(e) => {
-              handleWebsiteChange(e.target.value);
-            }}
+            name="website"
             placeholder="Website"
           ></input>
-        </div>
+        </fieldset>
+        <fieldset id="education">
+          <legend>Education</legend>
+          <table>
+            <thead>
+              <tr>
+                <th>Completed</th>
+                <th>Study</th>
+                <th>School</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="date"
+                    className="date"
+                    name="completedDate"
+                  ></input>
+                </td>
+                <td>
+                  <input type="text" name="course"></input>
+                </td>
+                <td>
+                  <input type="text" name="school"></input>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+        <fieldset id="work">
+          <legend>Work Experience</legend>
+          <table>
+            <thead>
+              <tr>
+                <th>From:</th>
+                <th>To:</th>
+                <th>Job Title</th>
+                <th>Company</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="date" className="date" name="dateStart"></input>
+                </td>
+                <td>
+                  <input
+                    type="date"
+                    id="endOfWork"
+                    className="date"
+                    name="dateEnd"
+                  ></input>
+                </td>
+                <td>
+                  <input type="text" name="jobTitle"></input>
+                </td>
+                <td>
+                  <input type="text" name="company"></input>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+        <button type="button" id="addWorkRow" onClick={addWorkData}>
+          Add Work
+        </button>
+        <button type="submit">Submit</button>
       </form>
-      <button>Submit</button>
     </section>
   );
 }
