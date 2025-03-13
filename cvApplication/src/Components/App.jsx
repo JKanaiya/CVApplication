@@ -12,6 +12,8 @@ function App() {
     email: "johnDoe@email.com",
     address: "realPlaceInRealCountry",
     website: "johndoe.com",
+    schoolData: [],
+    workData: [],
   });
 
   const [displayPrev, setDisplayPrev] = useState("none");

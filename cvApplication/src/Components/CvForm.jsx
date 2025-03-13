@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import { FaPhone } from "react-icons/fa6";
+import { FaPhone, FaPlus } from "react-icons/fa6";
 import { IoGlobe, IoHome, IoMail } from "react-icons/io5";
 
 function CvForm({ cv, sendData, form, display }) {
@@ -87,7 +87,7 @@ function CvForm({ cv, sendData, form, display }) {
   const workOutput = workData.map((row) => {
     return (
       <tr key={row.id}>
-        <td>
+        <td data="From:">
           <input
             type="date"
             className="date"
@@ -97,7 +97,7 @@ function CvForm({ cv, sendData, form, display }) {
             }}
           ></input>
         </td>
-        <td>
+        <td data="To:">
           <input
             type="date"
             id="endOfWork"
@@ -106,14 +106,14 @@ function CvForm({ cv, sendData, form, display }) {
             onChange={(e) => changeWorkVal(row.id, e.target.value, "dateEnd")}
           ></input>
         </td>
-        <td>
+        <td data="job title:">
           <input
             type="text"
             name="jobTitle"
             onChange={(e) => changeWorkVal(row.id, e.target.value, "jobTitle")}
           ></input>
         </td>
-        <td>
+        <td data="company:">
           <input
             type="text"
             name="company"
@@ -127,7 +127,7 @@ function CvForm({ cv, sendData, form, display }) {
   const schoolOutput = schoolData.map((row) => {
     return (
       <tr key={row.id}>
-        <td>
+        <td data="Completed:">
           <input
             type="date"
             className="date"
@@ -137,14 +137,14 @@ function CvForm({ cv, sendData, form, display }) {
             }
           ></input>
         </td>
-        <td>
+        <td data="Course:">
           <input
             type="text"
             name="course"
             onChange={(e) => changeSchoolVal(row.id, e.target.value, "course")}
           ></input>
         </td>
-        <td>
+        <td data="School:">
           <input
             type="text"
             name="school"
@@ -219,11 +219,18 @@ function CvForm({ cv, sendData, form, display }) {
             ></input>
           </div>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button id="submit" type="submit">
+          Submit
+        </button>
       </form>
       <div>
         <fieldset id="education">
-          <legend>Education</legend>
+          <legend>
+            Education
+            <button type="button" id="addEducationRow" onClick={addSchoolData}>
+              +
+            </button>
+          </legend>
           <table>
             <thead>
               <tr>
@@ -236,7 +243,12 @@ function CvForm({ cv, sendData, form, display }) {
           </table>
         </fieldset>
         <fieldset id="work">
-          <legend>Work Experience</legend>
+          <legend>
+            Work Experience
+            <button type="button" id="addWorkRow" onClick={addWorkData}>
+              +
+            </button>
+          </legend>
           <table>
             <thead>
               <tr>
@@ -251,12 +263,6 @@ function CvForm({ cv, sendData, form, display }) {
         </fieldset>
       </div>
       {/*TODO: change these to icons + and - later*/}
-      <button type="button" id="addWorkRow" onClick={addWorkData}>
-        Add Work
-      </button>
-      <button type="button" id="addEducationRow" onClick={addSchoolData}>
-        Add Education
-      </button>
     </section>
   );
 }

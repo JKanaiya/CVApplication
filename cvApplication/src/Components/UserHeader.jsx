@@ -1,7 +1,7 @@
 import { IoPersonCircleOutline } from "react-icons/io5";
 const UserHeader = function ({ firstName, secondName }) {
   return (
-    <div>
+    <div id="names">
       <h1>
         <IoPersonCircleOutline />
         {firstName} {secondName}

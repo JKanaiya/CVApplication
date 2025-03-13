@@ -2,7 +2,7 @@ import { FaPhone } from "react-icons/fa6";
 import { IoMail, IoHomeSharp, IoGlobe } from "react-icons/io5";
 const UserDetails = function (cv) {
   return (
-    <div>
+    <div id="contact">
       <h2>Contact Me!</h2>
       <h3>
         <FaPhone />
