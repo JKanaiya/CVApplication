@@ -1,10 +1,16 @@
+import { nanoid } from "nanoid";
 import { useState } from "react";
+import { FaPhone } from "react-icons/fa6";
+import { IoGlobe, IoHome, IoMail } from "react-icons/io5";
 
 function CvForm({ cv, sendData, form, display }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    formData.set("workData", JSON.stringify(workData));
+    formData.set("schoolData", JSON.stringify(schoolData));
     sendData(Object.fromEntries(formData));
+    console.log(workOutput);
   };
 
   const [workData, setWorkData] = useState([]);
@@ -14,7 +20,11 @@ function CvForm({ cv, sendData, form, display }) {
     setWorkData([
       ...workData,
       {
-        id: workData.length,
+        id: nanoid(),
+        dateStart: "",
+        dateEnd: "",
+        jobTitle: "",
+        company: "",
       },
     ]);
   };
@@ -23,16 +33,69 @@ function CvForm({ cv, sendData, form, display }) {
     setSchoolData([
       ...schoolData,
       {
-        id: schoolData.length,
+        id: nanoid(),
+        completedDate: "",
+        course: "",
+        school: "",
       },
     ]);
+  };
+
+  const changeWorkVal = function (id, val, data) {
+    workData.forEach((ind) => {
+      if (ind.id == id) {
+        switch (data) {
+          case "dateStart":
+            ind.dateStart = val;
+            break;
+          case "dateEnd":
+            ind.dateEnd = val;
+            break;
+          case "jobTitle":
+            ind.jobTitle = val;
+            break;
+          case "company":
+            ind.company = val;
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  };
+
+  const changeSchoolVal = function (id, val, data) {
+    schoolData.forEach((ind) => {
+      if (ind.id == id) {
+        switch (data) {
+          case "completedDate":
+            ind.completedDate = val;
+            break;
+          case "course":
+            ind.course = val;
+            break;
+          case "school":
+            ind.school = val;
+            break;
+          default:
+            break;
+        }
+      }
+    });
   };
 
   const workOutput = workData.map((row) => {
     return (
       <tr key={row.id}>
         <td>
-          <input type="date" className="date" name="dateStart"></input>
+          <input
+            type="date"
+            className="date"
+            name="dateStart"
+            onChange={(e) => {
+              changeWorkVal(row.id, e.target.value, "dateStart");
+            }}
+          ></input>
         </td>
         <td>
           <input
@@ -40,13 +103,22 @@ function CvForm({ cv, sendData, form, display }) {
             id="endOfWork"
             className="date"
             name="dateEnd"
+            onChange={(e) => changeWorkVal(row.id, e.target.value, "dateEnd")}
           ></input>
         </td>
         <td>
-          <input type="text" name="jobTitle"></input>
+          <input
+            type="text"
+            name="jobTitle"
+            onChange={(e) => changeWorkVal(row.id, e.target.value, "jobTitle")}
+          ></input>
         </td>
         <td>
-          <input type="text" name="company"></input>
+          <input
+            type="text"
+            name="company"
+            onChange={(e) => changeWorkVal(row.id, e.target.value, "company")}
+          ></input>
         </td>
       </tr>
     );
@@ -56,13 +128,28 @@ function CvForm({ cv, sendData, form, display }) {
     return (
       <tr key={row.id}>
         <td>
-          <input type="date" className="date" name="completedDate"></input>
+          <input
+            type="date"
+            className="date"
+            name="completedDate"
+            onChange={(e) =>
+              changeSchoolVal(row.id, e.target.value, "completedDate")
+            }
+          ></input>
         </td>
         <td>
-          <input type="text" name="course"></input>
+          <input
+            type="text"
+            name="course"
+            onChange={(e) => changeSchoolVal(row.id, e.target.value, "course")}
+          ></input>
         </td>
         <td>
-          <input type="text" name="school"></input>
+          <input
+            type="text"
+            name="school"
+            onChange={(e) => changeSchoolVal(row.id, e.target.value, "school")}
+          ></input>
         </td>
       </tr>
     );
@@ -95,31 +182,46 @@ function CvForm({ cv, sendData, form, display }) {
         </fieldset>
         <fieldset id="contactDetails">
           <legend>Contact Details</legend>
-          <input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="Phone Number"
-          ></input>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email"
-          ></input>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Address"
-          ></input>
-          <input
-            type="text"
-            id="website"
-            name="website"
-            placeholder="Website"
-          ></input>
+          <div className="contactContainer">
+            <FaPhone />
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="Phone Number"
+            ></input>
+          </div>
+          <div className="contactContainer">
+            <IoMail />
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Email"
+            ></input>
+          </div>
+          <div className="contactContainer">
+            <IoHome />
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="Address"
+            ></input>
+          </div>
+          <div className="contactContainer">
+            <IoGlobe />
+            <input
+              type="text"
+              id="website"
+              name="website"
+              placeholder="Website"
+            ></input>
+          </div>
         </fieldset>
+        <button type="submit">Submit</button>
+      </form>
+      <div>
         <fieldset id="education">
           <legend>Education</legend>
           <table>
@@ -130,24 +232,7 @@ function CvForm({ cv, sendData, form, display }) {
                 <th>School</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input
-                    type="date"
-                    className="date"
-                    name="completedDate"
-                  ></input>
-                </td>
-                <td>
-                  <input type="text" name="course"></input>
-                </td>
-                <td>
-                  <input type="text" name="school"></input>
-                </td>
-              </tr>
-              {schoolOutput}
-            </tbody>
+            <tbody>{schoolOutput}</tbody>
           </table>
         </fieldset>
         <fieldset id="work">
@@ -161,39 +246,17 @@ function CvForm({ cv, sendData, form, display }) {
                 <th>Company</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input type="date" className="date" name="dateStart"></input>
-                </td>
-                <td>
-                  <input
-                    type="date"
-                    id="endOfWork"
-                    className="date"
-                    name="dateEnd"
-                  ></input>
-                </td>
-                <td>
-                  <input type="text" name="jobTitle"></input>
-                </td>
-                <td>
-                  <input type="text" name="company"></input>
-                </td>
-              </tr>
-              {workOutput}
-            </tbody>
+            <tbody>{workOutput}</tbody>
           </table>
         </fieldset>
-        {/*TODO: change these to icons + and - later*/}
-        <button type="button" id="addWorkRow" onClick={addWorkData}>
-          Add Work
-        </button>
-        <button type="button" id="addEducationRow" onClick={addSchoolData}>
-          Add Education
-        </button>
-        <button type="submit">Submit</button>
-      </form>
+      </div>
+      {/*TODO: change these to icons + and - later*/}
+      <button type="button" id="addWorkRow" onClick={addWorkData}>
+        Add Work
+      </button>
+      <button type="button" id="addEducationRow" onClick={addSchoolData}>
+        Add Education
+      </button>
     </section>
   );
 }
