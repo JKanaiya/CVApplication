@@ -7,7 +7,11 @@ const Preview = function ({ cv, display, editData }) {
   return (
     <>
       <div id="preview" style={{ display: `${display}` }}>
-        <UserHeader firstName={cv.firstName} secondName={cv.secondName} />
+        <UserHeader
+          firstName={cv.firstName}
+          secondName={cv.secondName}
+          resume={cv.resumeDetails}
+        />
         <UserWork {...cv} />
         <UserDetails {...cv} />
         <UserEducation {...cv} />
